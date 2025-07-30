@@ -185,8 +185,8 @@ const Contact = () => {
 
   // EmailJS configuration - Replace these with your actual values
   const EMAIL_SERVICE_ID = 'service_cx4fjzj'; // Replace with your EmailJS service ID
-  const EMAIL_TEMPLATE_ID = 'template_t42rqfe'; // Replace with your EmailJS template ID
-  const EMAIL_PUBLIC_KEY = 'uSmfVcS-PavzuKrm2'; // Replace with your EmailJS public key
+  const EMAIL_TEMPLATE_ID = 'template_yi5962m'; // Replace with your EmailJS template ID
+  const EMAIL_PUBLIC_KEY = 'eNbWaF1jnp185iOjb'; // Replace with your EmailJS public key
 
   // Initialize EmailJS
   useEffect(() => {
@@ -254,8 +254,8 @@ const Contact = () => {
     try {
       // Prepare template parameters for EmailJS
       const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
+        name: formData.name,
+        email: formData.email,
         phone: formData.countryCode + ' ' + formData.phone,
         service: serviceOptions.find(s => s.value === formData.service)?.label || formData.service,
         message: formData.message,
