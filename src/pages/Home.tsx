@@ -378,7 +378,7 @@ const Home: React.FC = () => {
     email: "cloudacq@gmail.com",
     phone: "+15551234567",
     address: {
-      streetAddress: "Singanallur",
+      streetAddress: "Race course",
       addressLocality: "San Francisco",
       addressRegion: "CA",
       postalCode: "94107",

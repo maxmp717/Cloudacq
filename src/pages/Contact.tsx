@@ -327,9 +327,9 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Visit Us',
-      content: 'Singanallur',
+      content: 'Race course',
       description: 'Coimbatore, Tamilnadu 641005',
-      href: 'https://maps.google.com/?q=Singanallur,Coimbatore,Tamil+Nadu+641005',
+      href: 'https://maps.google.com/?q=Race course,Coimbatore,Tamil+Nadu+641005',
       linkText: 'Open in maps',
       copyable: false,
     },

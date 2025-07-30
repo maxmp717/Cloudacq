@@ -369,7 +369,7 @@ const FooterPreview = () => {
                 {[
                   { icon: Mail, href: 'mailto:cloudacq@gmail.com', text: 'cloudacq@gmail.com', gradient: 'from-blue-500 to-cyan-500' },
                   { icon: Phone, href: 'tel:+918122441337', text: '+91 (812) 244-1337', gradient: 'from-emerald-500 to-teal-500' },
-                  { icon: MapPin, href: 'https://maps.google.com/?q=1234+Tech+Avenue,+San+Francisco,+CA+94107', text: 'Singanallur\n Coimbatore, Tamilnadu 641005', gradient: 'from-purple-500 to-pink-500' }
+                  { icon: MapPin, href: 'https://maps.google.com/?q=1234+Tech+Avenue,+San+Francisco,+CA+94107', text: 'Race course\n Coimbatore, Tamilnadu 641005', gradient: 'from-purple-500 to-pink-500' }
                 ].map((contact, index) => {
                   const IconComponent = contact.icon;
                   return (
