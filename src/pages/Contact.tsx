@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import { 
   Send, Mail, Phone, MapPin, MessageSquare, Calendar, AlertCircle,
   Globe, Zap, Star, Award, CheckCircle, Heart, Users, Clock,
   Shield, Sparkles, Copy, CheckCircle2, ExternalLink, Building2,
   Headphones, Coffee, Wifi
 } from 'lucide-react';
+
 
 // Floating Particle Component
 const FloatingParticle = ({ delay, size = 'small' }) => {
@@ -181,6 +183,16 @@ const Contact = () => {
   const [hoveredContact, setHoveredContact] = useState(null);
   const [currentTime, setCurrentTime] = useState(new Date());
 
+  // EmailJS configuration - Replace these with your actual values
+  const EMAIL_SERVICE_ID = 'service_cx4fjzj'; // Replace with your EmailJS service ID
+  const EMAIL_TEMPLATE_ID = 'template_t42rqfe'; // Replace with your EmailJS template ID
+  const EMAIL_PUBLIC_KEY = 'uSmfVcS-PavzuKrm2'; // Replace with your EmailJS public key
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(EMAIL_PUBLIC_KEY);
+  }, []);
+
   // Update current time every minute
   useEffect(() => {
     const timer = setInterval(() => {
@@ -229,7 +241,7 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -239,9 +251,29 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitError(null);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Prepare template parameters for EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.countryCode + ' ' + formData.phone,
+        service: serviceOptions.find(s => s.value === formData.service)?.label || formData.service,
+        message: formData.message,
+        date: new Date().toLocaleString(), 
+        to_name: 'CloudAcq Team', // Your name/company name
+      };
+
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        EMAIL_SERVICE_ID,
+        EMAIL_TEMPLATE_ID,
+        templateParams,
+        EMAIL_PUBLIC_KEY // <-- Add this 4th argument
+      );
+
+      console.log('Email sent successfully:', result);
+      
+      // Success - show success message
       setIsSubmitted(true);
       setFormData({
         name: '',
@@ -251,7 +283,16 @@ const Contact = () => {
         service: '',
         message: '',
       });
-    }, 2000);
+      
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setSubmitError(
+        error.text || 
+        'Failed to send message. Please try again or contact us directly via email.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Format current time for different timezones
@@ -279,7 +320,7 @@ const Contact = () => {
       title: 'Call Us',
       content: '+91 (812) 244-1337',
       description: 'Mon-Fri from 9am to 6pm PST',
-      href: 'tel:+15551234567',
+      href: 'tel:+918122441337',
       linkText: 'Call now',
       copyable: true,
     },
@@ -288,7 +329,7 @@ const Contact = () => {
       title: 'Visit Us',
       content: 'Singanallur',
       description: 'Coimbatore, Tamilnadu 641005',
-      href: 'https://maps.google.com/?q=1234+Tech+Avenue,+San+Francisco,+CA+94107',
+      href: 'https://maps.google.com/?q=Singanallur,Coimbatore,Tamil+Nadu+641005',
       linkText: 'Open in maps',
       copyable: false,
     },
@@ -323,6 +364,7 @@ const Contact = () => {
     { code: '+32', country: 'BE', flag: '🇧🇪' },
     { code: '+45', country: 'DK', flag: '🇩🇰' },
   ];
+
   const serviceOptions = [
     { value: 'web-development', label: 'Web Development', emoji: '🌐' },
     { value: 'mobile-app-development', label: 'Mobile App Development', emoji: '📱' },
@@ -464,8 +506,6 @@ const Contact = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
                 
                 <div className="relative z-10">
-                  {/* <h3 className="text-2xl font-bold text-white mb-8 text-center">Contact Information</h3> */}
-                  
                   <div className="space-y-6">
                     {contactMethods.map((contact, index) => {
                       const IconComponent = contact.icon;
@@ -484,10 +524,6 @@ const Contact = () => {
                           
                           {/* Content */}
                           <div className="flex-1">
-                            {/* <h4 className="text-lg font-semibold text-white mb-1 group-hover/item:text-blue-200 transition-colors duration-300">
-                              {contact.title}
-                            </h4>
-                             */}
                             <div className="flex items-center gap-2 mb-1">
                               <p className="text-gray-300 group-hover/item:text-gray-200 transition-colors duration-300 font-medium">
                                 {contact.content}
@@ -608,7 +644,7 @@ const Contact = () => {
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-4">Message Sent Successfully!</h3>
                         <p className="text-gray-300 mb-8 leading-relaxed">
-                          Thank you for contacting us. We've received your message and will get back to you within 24 hours.
+                          Thank you for contacting us. We've received your message and will get back to you within 2 hours during business hours.
                         </p>
                         <button
                           onClick={() => setIsSubmitted(false)}
