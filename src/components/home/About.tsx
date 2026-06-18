@@ -159,7 +159,7 @@ const About = () => {
                 <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-3xl overflow-hidden shadow-2xl hover:scale-105 transition-transform duration-500 group">
                   <div className="relative">
                     <img
-                      src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                      src="/assets/pexels-photo-3184465.jpeg"
                       alt="Team collaborating in modern office"
                       className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700"
                     />

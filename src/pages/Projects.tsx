@@ -114,6 +114,17 @@ const WaveAnimation = ({ className = "", position = "bottom", inverted = false }
   );
 };
 
+const toLocalImage = (src: string) => {
+  if (!src) return '/assets/pexels-photo-3184465.jpeg';
+  try {
+    const url = new URL(src);
+    const name = url.pathname.split('/').pop() || 'pexels-photo-3184465.jpeg';
+    return `/assets/${name.replace(/^\//, '')}`;
+  } catch (_) {
+    return src;
+  }
+};
+
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
@@ -268,6 +279,7 @@ const Projects = () => {
         <title>Projects | Cloudacq - Innovative Digital Solutions Portfolio</title>
         <meta name="description" content="Explore our portfolio of successful client projects and digital solutions. From e-commerce platforms to mobile apps and enterprise solutions that drive business growth." />
         <meta name="keywords" content="web development projects, mobile app portfolio, digital solutions, client work, case studies" />
+        <link rel="canonical" href="https://cloudacq.com/projects" />
       </Helmet>
 
       <div className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen overflow-hidden">
@@ -407,8 +419,7 @@ const Projects = () => {
                           {/* Image Section */}
                           <div className="relative aspect-video overflow-hidden">
                             <img
-                              src={project.image}
-                              alt={project.title}
+                        src={toLocalImage(project.image)}
                               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                             

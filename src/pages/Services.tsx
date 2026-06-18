@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { 
   Code, Smartphone, Palette, Database, BarChart, Bot, CheckCircle, ArrowRight, Search,
@@ -443,7 +444,13 @@ const Services = () => {
     : services.filter(service => service.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-x-hidden">
+    <>
+      <Helmet>
+        <title>Services | Cloudacq - Professional Digital Services</title>
+        <meta name="description" content="Custom web development, mobile apps, UI/UX design, SEO, and cloud solutions from Cloudacq." />
+        <link rel="canonical" href="https://cloudacq.com/services" />
+      </Helmet>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-x-hidden">
       {/* Floating Particles Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(30)].map((_, i) => (
@@ -862,14 +869,9 @@ const Services = () => {
         </div>
       </section>
 
-      <style jsx>{`
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}</style>
-          <ScrollToTop />
+      <ScrollToTop />
     </div>
+    </>
   );
 };
 

@@ -107,6 +107,17 @@ const projects = [
 
 const categories = ['All', 'E-commerce', 'Mobile App', 'Healthcare', 'Real Estate', 'Education', 'Dashboard'];
 
+const toLocalImage = (src: string) => {
+  if (!src) return '/assets/pexels-photo-3184465.jpeg';
+  try {
+    const url = new URL(src);
+    const name = url.pathname.split('/').pop() || 'pexels-photo-3184465.jpeg';
+    return `/assets/${name.replace(/^\//, '')}`;
+  } catch (_) {
+    return src;
+  }
+};
+
 const ProjectsShowcase = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [hoveredProject, setHoveredProject] = useState(null);
@@ -227,7 +238,7 @@ const ProjectsShowcase = () => {
                     {/* Image Section */}
                     <div className="relative aspect-video overflow-hidden">
                       <img
-                        src={project.image}
+                        src={toLocalImage(project.image)}
                         alt={project.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
@@ -347,7 +358,7 @@ const ProjectsShowcase = () => {
         </div> */}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }

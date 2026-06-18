@@ -15,6 +15,17 @@ const FloatingParticle = ({ delay }) => (
   />
 );
 
+const toLocalImage = (src: string) => {
+  if (!src) return '/assets/pexels-photo-3184465.jpeg';
+  try {
+    const url = new URL(src);
+    const name = url.pathname.split('/').pop() || 'pexels-photo-3184465.jpeg';
+    return `/assets/${name.replace(/^\//, '')}`;
+  } catch (_) {
+    return src;
+  }
+};
+
 const testimonials = [
   {
     id: '1',
@@ -265,7 +276,7 @@ const Testimonials = () => {
                   <div className="relative z-10 flex items-center">
                     <div className="relative">
                       <img
-                        src={testimonial.avatar}
+                        src={toLocalImage(testimonial.avatar)}
                         alt={testimonial.name}
                         className="w-14 h-14 rounded-full object-cover border-2 border-white/30 group-hover:border-white/60 transition-colors duration-300"
                       />

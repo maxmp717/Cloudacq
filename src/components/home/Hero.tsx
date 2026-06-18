@@ -340,7 +340,7 @@ const Hero = () => {
                 <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-3xl shadow-2xl p-4 hover:scale-105 transition-transform duration-500">
                   <div className="relative overflow-hidden rounded-2xl">
                     <img
-                      src="https://images.pexels.com/photos/3182811/pexels-photo-3182811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                      src="/assets/pexels-photo-3182811.jpeg"
                       alt="Tech team collaborating on a digital project"
                       className="rounded-2xl object-cover hover:scale-110 transition-transform duration-700"
                       style={{ width: '400px', height: '600px', maxWidth: '100%' }}

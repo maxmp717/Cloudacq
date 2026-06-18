@@ -118,7 +118,18 @@ const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const blogPosts = [
+  const toLocalImage = (src: string) => {
+  if (!src) return '/assets/pexels-photo-3184465.jpeg';
+  try {
+    const url = new URL(src);
+    const name = url.pathname.split('/').pop() || 'pexels-photo-3184465.jpeg';
+    return `/assets/${name.replace(/^\//, '')}`;
+  } catch (_) {
+    return src;
+  }
+};
+
+const blogPosts = [
     {
       id: 'web-design-trends-2025',
       title: 'Web Design Trends to Watch in 2025',
@@ -293,6 +304,7 @@ const Blog = () => {
         <title>Blog | Cloudacq - Insights, Guides & Tech Trends</title>
         <meta name="description" content="Explore our latest articles, insights, and guides on web development, design, technology trends, AI, and digital transformation strategies." />
         <meta name="keywords" content="web development blog, design trends, technology insights, programming tutorials, digital transformation" />
+        <link rel="canonical" href="https://cloudacq.com/blog" />
       </Helmet>
 
       <div className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen overflow-hidden">
@@ -470,7 +482,7 @@ const Blog = () => {
                             <Link to={`/blog/${post.id}`} className="block">
                               <div className="relative aspect-video overflow-hidden">
                                 <img
-                                  src={post.image}
+                                  src={toLocalImage(post.image)}
                                   alt={post.title}
                                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />

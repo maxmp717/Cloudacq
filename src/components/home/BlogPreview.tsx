@@ -16,6 +16,17 @@ const FloatingParticle = ({ delay }) => (
   />
 );
 
+const toLocalImage = (src: string) => {
+  if (!src) return '/assets/pexels-photo-3184465.jpeg';
+  try {
+    const url = new URL(src);
+    const name = url.pathname.split('/').pop() || 'pexels-photo-3184465.jpeg';
+    return `/assets/${name.replace(/^\//, '')}`;
+  } catch (_) {
+    return src;
+  }
+};
+
 const BlogPreview = () => {
   const blogPosts = [
     {
@@ -161,7 +172,7 @@ const BlogPreview = () => {
                   <Link to={`/blog/${post.id}`} className="block relative overflow-hidden">
                     <div className="aspect-video relative">
                       <img
-                        src={post.image}
+                        src={toLocalImage(post.image)}
                         alt={post.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />

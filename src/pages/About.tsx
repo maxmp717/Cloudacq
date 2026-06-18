@@ -113,6 +113,17 @@ const WaveAnimation = ({ className = "", position = "bottom", inverted = false }
   );
 };
 
+const toLocalImage = (src: string) => {
+  if (!src) return '/assets/pexels-photo-3184465.jpeg';
+  try {
+    const url = new URL(src);
+    const name = url.pathname.split('/').pop() || 'pexels-photo-3184465.jpeg';
+    return `/assets/${name.replace(/^\//, '')}`;
+  } catch (_) {
+    return src;
+  }
+};
+
 const team = [
   {
     id: 'john-doe',
@@ -195,6 +206,7 @@ const About = () => {
         <title>About Us | Cloudacq - Leading Digital Innovation Team</title>
         <meta name="description" content="Learn about Cloudacq, our mission, values, and the talented team behind our exceptional web development and digital services. Discover our journey from startup to industry leader." />
         <meta name="keywords" content="about cloudacq, web development team, digital agency, company mission, tech startup, innovation team" />
+        <link rel="canonical" href="https://cloudacq.com/about" />
       </Helmet>
 
       <div className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen overflow-hidden">
@@ -319,7 +331,7 @@ const About = () => {
                   
                   <div className="relative z-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-2 hover:scale-105 transition-transform duration-500">
                     <img
-                      src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                      src="/assets/pexels-photo-3184465.jpeg"
                       alt="Cloudacq team collaboration"
                       className="w-full h-auto rounded-2xl"
                     />
@@ -491,7 +503,7 @@ const About = () => {
                     
                       <div className="aspect-[4/5] overflow-hidden relative">
                         <img
-                          src={member.image}
+                          src={toLocalImage(member.image)}
                           alt={member.name}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />

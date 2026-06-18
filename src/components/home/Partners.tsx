@@ -14,6 +14,17 @@ const FloatingParticle = ({ delay }) => (
   />
 );
 
+const toLocalImage = (src: string) => {
+  if (!src) return '/assets/pexels-photo-3184465.jpeg';
+  try {
+    const url = new URL(src);
+    const name = url.pathname.split('/').pop() || 'pexels-photo-3184465.jpeg';
+    return `/assets/${name.replace(/^\//, '')}`;
+  } catch (_) {
+    return src;
+  }
+};
+
 const Partners = () => {
   // Partner logos with enhanced data
   const partnerLogos = [
@@ -137,7 +148,7 @@ const Partners = () => {
                 {/* Logo Container */}
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                   <img
-                    src={partner.logo}
+                    src={toLocalImage(partner.logo)}
                     alt={partner.name}
                     className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-500"
                   />

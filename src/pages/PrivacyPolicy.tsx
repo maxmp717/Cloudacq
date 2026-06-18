@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Shield, Lock, Eye, Users, Globe, FileText, AlertCircle, Mail, Phone, MapPin, CheckCircle, Star } from 'lucide-react';
 
@@ -232,7 +233,13 @@ const PrivacyPolicy = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+    <>
+      <Helmet>
+        <title>Privacy Policy | Cloudacq</title>
+        <meta name="description" content="Cloudacq Privacy Policy describing how we collect, use, and protect your data." />
+        <link rel="canonical" href="https://cloudacq.com/privacy-policy" />
+      </Helmet>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
       {/* Hero Section */}
       <section className="relative pt-32 md:pt-40 pb-32 md:pb-40 overflow-hidden min-h-screen flex items-center">
         {/* Floating Particles Background */}
@@ -517,6 +524,7 @@ const PrivacyPolicy = () => {
         <WaveAnimation />
       </section>
     </div>
+    </>
   );
 };
 
